@@ -1,24 +1,22 @@
 const db = require('./db');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs'); // npm install bcryptjs
 
 const senha = bcrypt.hashSync('123456', 10);
 
 db.prepare(`
-    INSERT OR IGNORE INTO empresas (id, nome, email, senha_hash)
-    VALUES (1, 'TechNova Ltda', 'contato@technova.com', ?)
+  INSERT OR IGNORE INTO empresas (id, nome, email, senha_hash)
+  VALUES (1, 'TechNova Ltda', 'contato@technova.com', ?)
 `).run(senha);
 
 db.prepare(`
-    INSERT OR IGNORE INTO vagas (id, titulo, empresa_id, tipo, tecnologias, salario, descricao)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+  INSERT INTO vagas (titulo, empresa_id, tipo, tecnologias, salario, descricao)
+  VALUES (?, 1, ?, ?, ?, ?)
 `).run(
-    1,
-    'Dev Frontend React',
-    1,
-    'remoto',
-    'React, TypeScript, CSS',
-    'R$ 6.000,00 - R$ 9.000,00',
-    'Vaga para desenvolvimento Web'
+  'Dev Frontend React',
+  'remoto',
+  'React,TypeScript,CSS',
+  'R$ 6.000 – R$ 9.000',
+  'Vaga para desenvolvimento de interfaces modernas.'
 );
 
-console.log('Seed concluído com sucesso!');
+console.log('Seed concluído!');

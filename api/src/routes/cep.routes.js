@@ -23,7 +23,6 @@ router.get('/:cep', async (req, res) => {
       bairro: data.bairro,
       logradouro: data.logradouro
     });
-
   } catch {
     res.status(502).json({ erro: 'Falha ao consultar ViaCEP' });
   }
